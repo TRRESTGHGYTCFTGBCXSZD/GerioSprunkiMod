@@ -1,0 +1,79 @@
+{
+  "variants": {
+    "face=wall,facing=north": {
+      "model": "geriorandomstuff:block/super_slate_base"
+    },
+    "face=wall,facing=east": {
+      "model": "geriorandomstuff:block/super_slate_base",
+      "y": 90
+    },
+    "face=wall,facing=south": {
+      "model": "geriorandomstuff:block/super_slate_base",
+      "y": 180
+    },
+    "face=wall,facing=west": {
+      "model": "geriorandomstuff:block/super_slate_base",
+      "y": 270
+    },
+    "face=ceiling,facing=north": {
+      "model": "geriorandomstuff:block/super_slate_base",
+      "x": 90
+    },
+    "face=ceiling,facing=east": {
+      "model": "geriorandomstuff:block/super_slate_base",
+      "x": 90,
+      "y": 90
+    },
+    "face=ceiling,facing=south": {
+      "model": "geriorandomstuff:block/super_slate_base",
+      "x": 90,
+      "y": 180
+    },
+    "face=ceiling,facing=west": {
+      "model": "geriorandomstuff:block/super_slate_base",
+      "x": 90,
+      "y": 270
+    },
+    "face=floor,facing=north": {
+      "model": "geriorandomstuff:block/super_slate_base",
+      "x": 270
+    },
+    "face=floor,facing=east": {
+      "model": "geriorandomstuff:block/super_slate_base",
+      "x": 270,
+      "y": 90
+    },
+    "face=floor,facing=south": {
+      "model": "geriorandomstuff:block/super_slate_base",
+      "x": 270,
+      "y": 180
+    },
+    "face=floor,facing=west": {
+      "model": "geriorandomstuff:block/super_slate_base",
+      "x": 270,
+      "y": 270
+    },
+	
+    "baseplate": {
+      "model": "geriorandomstuff:block/super_slate_base"
+    },
+    "screenface": {
+      "model": "geriorandomstuff:block/super_slate_face"
+    },
+    "screenface_color": {
+      "model": "geriorandomstuff:block/super_slate_face_color"
+    },
+    "emotion_normal": {
+      "model": "geriorandomstuff:block/super_slate_face_normal"
+    },
+    "emotion_huh": {
+      "model": "geriorandomstuff:block/super_slate_face_huh"
+    },
+    "emotion_dumb": {
+      "model": "geriorandomstuff:block/super_slate_face_dumb"
+    },
+    "emotion_sad": {
+      "model": "geriorandomstuff:block/super_slate_face_sad"
+    }
+  }
+}
