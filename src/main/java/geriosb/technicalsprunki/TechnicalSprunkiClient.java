@@ -21,6 +21,6 @@ public class TechnicalSprunkiClient {
 
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers evt) {
-        evt.registerEntityRenderer((EntityType)Sprunkis.OREN.get(), OrenSprunkiRenderer::new);
+        evt.registerEntityRenderer(Sprunkis.OREN.get(), OrenSprunkiRenderer::new);
     }
 }

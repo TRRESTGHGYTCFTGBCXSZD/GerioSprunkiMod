@@ -1,6 +1,7 @@
 
 package geriosb.technicalsprunki;
 
+import geriosb.technicalsprunki.init.AllItems;
 import geriosb.technicalsprunki.init.Sprunkis;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
@@ -28,7 +29,6 @@ import java.util.ArrayList;
 import java.util.AbstractMap;
 
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.ModList;
 
 @Mod("technicalsprunki")
 @Mod.EventBusSubscriber(modid = "technicalsprunki", bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -39,7 +39,8 @@ public class TechnicalSprunkiMod {
 	public TechnicalSprunkiMod() {
 		MinecraftForge.EVENT_BUS.register(this);
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-		Sprunkis.SPRUNKIS.register(bus);
+        Sprunkis.SPRUNKIS.register(bus);
+        AllItems.REGISTRY.register(bus);
 
 	}
     @SubscribeEvent
@@ -48,11 +49,13 @@ public class TechnicalSprunkiMod {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
     }
 
+    @SuppressWarnings("deprecation")
     public static ResourceLocation rl(String path) {
         return new ResourceLocation("geriorandomstuff", path);
     }
 
 	private static final String PROTOCOL_VERSION = "1";
+    @SuppressWarnings("deprecation")
 	public static final SimpleChannel PACKET_HANDLER = NetworkRegistry.newSimpleChannel(new ResourceLocation(MODID, MODID), () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
 	private static int messageID = 0;
 

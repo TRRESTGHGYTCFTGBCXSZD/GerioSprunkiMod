@@ -8,16 +8,12 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.network.PlayMessages;
 
 public class OrenSprunkiEntity extends SprunkiEntity {
-    public OrenSprunkiEntity(EntityType<? extends PathfinderMob> p_21683_, Level p_21684_) {
-        super(p_21683_, p_21684_);
+    public OrenSprunkiEntity(EntityType<OrenSprunkiEntity> type, Level level) {
+        super(type, level);
+    }
+    public OrenSprunkiEntity(PlayMessages.SpawnEntity packet, Level world) {
+        this(Sprunkis.OREN.get(), world);
     }
     public static void init() {
-    }
-
-    public static AttributeSupplier.Builder createAttributes() {
-        AttributeSupplier.Builder builder = Mob.createMobAttributes();
-        builder = builder.add(Attributes.MOVEMENT_SPEED, 0.3);
-        builder = builder.add(Attributes.MAX_HEALTH, (double)10.0F);
-        return builder;
     }
 }

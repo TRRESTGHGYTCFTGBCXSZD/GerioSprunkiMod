@@ -3,10 +3,10 @@ loaderVersion="[47,)"
 license="All Rights Reserved"
 
 [[mods]]
-modId="geriorandomstuff"
+modId="technicalsprunki"
 version="1.0.0"
-displayName="Randomness"
-credits="Created using mod maker MCreator - https://mcreator.net/about"
+displayName="Gerio's Sprunki"
+credits="私のパンチを受けてみろ"
 displayURL="https://github.com/TRRESTGHGYTCFTGBCXSZD"
 authors="GerioSB"
 
@@ -14,27 +14,6 @@ authors="GerioSB"
     modId="minecraft"
     mandatory=true
     versionRange="[1.20.1]"
-    ordering="NONE"
-    side="BOTH"
-
-
-
-[[dependencies.geriorandomstuff]]
-    modId="mekanism"
-    mandatory=false
-    versionRange="[0,)"
-    ordering="NONE"
-    side="BOTH"
-[[dependencies.geriorandomstuff]]
-    modId="appeng"
-    mandatory=false
-    versionRange="[0,)"
-    ordering="NONE"
-    side="BOTH"
-[[dependencies.geriorandomstuff]]
-    modId="com.simibubi.create"
-    mandatory=false
-    versionRange="[0,)"
     ordering="NONE"
     side="BOTH"
 

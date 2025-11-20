@@ -1,43 +1,15 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "group": "pasteyourself",
-  "category": "misc",
-  "pattern": [
-    "012",
-    "345",
-    "678"
-  ],
-  "key": {
-    "0": {
-      "item": "minecraft:milk_bucket"
-    },
-    "1": {
-      "item": "minecraft:milk_bucket"
-    },
-    "2": {
-      "item": "minecraft:milk_bucket"
-    },
-    "3": {
-      "item": "minecraft:milk_bucket"
-    },
-    "4": {
-      "item": "minecraft:milk_bucket"
-    },
-    "5": {
-      "item": "minecraft:milk_bucket"
-    },
-    "6": {
-      "item": "minecraft:milk_bucket"
-    },
-    "7": {
-      "item": "minecraft:milk_bucket"
-    },
-    "8": {
-      "item": "minecraft:milk_bucket"
-    }
+  "type": "hexcasting:brainsweep",
+  "blockIn": {
+    "type": "block",
+    "block": "technicalsprunki:sprunki_cast"
+  },
+  "cost": 100000,
+  "entityIn": {
+    "type": "entity_type",
+    "entityType": "technicalsprunki:oren"
   },
   "result": {
-    "item": "geriorandomstuff:paste",
-    "count": 1
+    "name": "technicalsprunki:oren_block"
   }
 }
