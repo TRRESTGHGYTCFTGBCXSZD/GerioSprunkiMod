@@ -4,14 +4,11 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import geriosb.technicalsprunki.common.entity.sprunki.OrenSprunkiEntity;
+import geriosb.technicalsprunki.common.entity.sprunki.PoloSprunkiEntity;
 import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import org.joml.Matrix3f;
@@ -19,19 +16,19 @@ import org.joml.Matrix4f;
 
 import static geriosb.technicalsprunki.TechnicalSprunkiMod.rl;
 
-public class OrenSprunkiRenderer extends EntityRenderer<OrenSprunkiEntity> {
-    private static final ResourceLocation tex = rl("textures/sprunki/oren.png");
+public class PoloSprunkiRenderer extends EntityRenderer<PoloSprunkiEntity> {
+    private static final ResourceLocation tex = rl("textures/sprunki/polo.png");
 
-    public OrenSprunkiRenderer(EntityRendererProvider.Context p_174008_) {
+    public PoloSprunkiRenderer(EntityRendererProvider.Context p_174008_) {
         super(p_174008_);
     }
 
     @Override
-    public ResourceLocation getTextureLocation(OrenSprunkiEntity orenSprunkiEntity) {
+    public ResourceLocation getTextureLocation(PoloSprunkiEntity orenSprunkiEntity) {
         return tex;
     }
     @Override
-    public void render(OrenSprunkiEntity sprunki, float yaw, float partialTicks, PoseStack ps,
+    public void render(PoloSprunkiEntity sprunki, float yaw, float partialTicks, PoseStack ps,
                        MultiBufferSource bufSource, int packedLight) {
 
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
@@ -60,15 +57,6 @@ public class OrenSprunkiRenderer extends EntityRenderer<OrenSprunkiEntity> {
             ps.mulPose(Axis.YP.rotationDegrees(-sprunki.getYHeadRot()-90));
             ps.mulPose(Axis.ZP.rotationDegrees(-sprunki.getXRot()));
             SprunkiRenderUtils.RenderHead(sprunki,yaw,partialTicks,ps,bufSource,packedLight,tex,headsize,color);
-            ps.popPose();
-            // headphones and antennas
-            ps.pushPose();
-            ps.translate(0f,headheight,0f);
-            ps.pushPose();
-            ps.mulPose(Axis.YP.rotationDegrees(-sprunki.getYHeadRot()));
-            ps.mulPose(Axis.ZP.rotationDegrees(sprunki.getXRot()));
-            ps.popPose();
-
             ps.popPose();
         }
 

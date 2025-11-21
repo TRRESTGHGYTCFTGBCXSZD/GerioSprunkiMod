@@ -1,5 +1,6 @@
 package geriosb.technicalsprunki.common.entity.sprunki;
 
+import geriosb.technicalsprunki.init.Sprunkis;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.network.PlayMessages;
 import net.minecraftforge.network.NetworkHooks;
@@ -86,7 +87,13 @@ public abstract class SprunkiEntity extends PathfinderMob {
         return builder;
     }
 
-    public void BrainSweep(){
+    public void BrainSweep(){ // flaying sprunki's mind will result in replacing with polo
+        Level level = level();
+        PoloSprunkiEntity polo = Sprunkis.POLO.get().create(level);
+        assert polo != null;
+        polo.setHealth(this.getHealth());
+        polo.moveTo(getX(),getY(),getZ(),getXRot(),getYRot());
+        level.addFreshEntity(polo);
         this.remove(RemovalReason.KILLED);
     }
 }

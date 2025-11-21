@@ -4,7 +4,7 @@
     "type": "block",
     "block": "technicalsprunki:sprunki_cast"
   },
-  "cost": 100000,
+  "cost": 10000,
   "entityIn": {
     "type": "entity_type",
     "entityType": "technicalsprunki:oren"

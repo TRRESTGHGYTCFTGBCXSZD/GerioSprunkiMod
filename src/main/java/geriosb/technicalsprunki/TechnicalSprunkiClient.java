@@ -1,6 +1,7 @@
 package geriosb.technicalsprunki;
 
 import geriosb.technicalsprunki.client.renderer.sprunki.OrenSprunkiRenderer;
+import geriosb.technicalsprunki.client.renderer.sprunki.PoloSprunkiRenderer;
 import geriosb.technicalsprunki.init.Sprunkis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
@@ -21,6 +22,7 @@ public class TechnicalSprunkiClient {
 
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers evt) {
+        evt.registerEntityRenderer(Sprunkis.POLO.get(), PoloSprunkiRenderer::new);
         evt.registerEntityRenderer(Sprunkis.OREN.get(), OrenSprunkiRenderer::new);
     }
 }

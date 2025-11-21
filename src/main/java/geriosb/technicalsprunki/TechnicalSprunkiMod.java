@@ -1,8 +1,11 @@
 
 package geriosb.technicalsprunki;
 
+import geriosb.technicalsprunki.init.AllBlocks;
 import geriosb.technicalsprunki.init.AllItems;
+import geriosb.technicalsprunki.init.BrainSweep;
 import geriosb.technicalsprunki.init.Sprunkis;
+import net.minecraftforge.fml.ModList;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
@@ -41,17 +44,21 @@ public class TechnicalSprunkiMod {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         Sprunkis.SPRUNKIS.register(bus);
         AllItems.REGISTRY.register(bus);
+        AllBlocks.REGISTRY.register(bus);
 
 	}
     @SubscribeEvent
     public static void onCommonSetup(FMLCommonSetupEvent event) {
         MinecraftForge.EVENT_BUS.register(TechnicalSprunkiMod.class);
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+        if (ModList.get().isLoaded("hexcasting")) {
+            BrainSweep.BrainSweepHandler();
+        }
     }
 
     @SuppressWarnings("deprecation")
     public static ResourceLocation rl(String path) {
-        return new ResourceLocation("geriorandomstuff", path);
+        return new ResourceLocation(MODID, path);
     }
 
 	private static final String PROTOCOL_VERSION = "1";
