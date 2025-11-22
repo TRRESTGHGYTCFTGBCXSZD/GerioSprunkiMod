@@ -58,7 +58,8 @@ public class Sprunkis {
 
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event){
-        event.put(OREN.get(), OrenSprunkiEntity.createAttributes().build());
         event.put(POLO.get(), PoloSprunkiEntity.createAttributes().build());
+        event.put(OREN.get(), OrenSprunkiEntity.createAttributes().build());
+        event.put(FUN_BOT.get(), FunBotSprunkiEntity.createAttributes().build());
     }
 }

@@ -1,5 +1,6 @@
 package geriosb.technicalsprunki;
 
+import geriosb.technicalsprunki.client.renderer.sprunki.FunBotSprunkiRenderer;
 import geriosb.technicalsprunki.client.renderer.sprunki.OrenSprunkiRenderer;
 import geriosb.technicalsprunki.client.renderer.sprunki.PoloSprunkiRenderer;
 import geriosb.technicalsprunki.init.Sprunkis;
@@ -24,5 +25,6 @@ public class TechnicalSprunkiClient {
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers evt) {
         evt.registerEntityRenderer(Sprunkis.POLO.get(), PoloSprunkiRenderer::new);
         evt.registerEntityRenderer(Sprunkis.OREN.get(), OrenSprunkiRenderer::new);
+        evt.registerEntityRenderer(Sprunkis.FUN_BOT.get(), FunBotSprunkiRenderer::new);
     }
 }
