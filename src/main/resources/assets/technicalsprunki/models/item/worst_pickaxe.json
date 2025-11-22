@@ -1,7 +1,0 @@
-{
-  "parent": "geriorandomstuff:custom/betterwait",
-  "textures": {
-    "0": "geriorandomstuff:block/new_supertool",
-    "particle": "geriorandomstuff:item/new_supertool"
-  }
-}

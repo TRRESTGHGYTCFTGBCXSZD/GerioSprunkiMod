@@ -1,6 +1,10 @@
 package geriosb.technicalsprunki.common.entity.sprunki;
 
+import at.petrak.hexcasting.xplat.IXplatAbstractions;
 import geriosb.technicalsprunki.init.Sprunkis;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.network.PlayMessages;
 import net.minecraftforge.network.NetworkHooks;
@@ -9,10 +13,6 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
-import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.SpawnPlacements;
@@ -33,6 +33,7 @@ public abstract class SprunkiEntity extends PathfinderMob {
     public SprunkiEntity(EntityType<? extends SprunkiEntity> type, Level world) {
         super(type, world);
         setMaxUpStep(0.6f);
+
         xpReward = 0;
         setNoAi(false);
     }
@@ -45,16 +46,18 @@ public abstract class SprunkiEntity extends PathfinderMob {
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.2, false) {
+        this.goalSelector.addGoal(0, new FloatGoal(this));
+        this.goalSelector.addGoal(1, new PanicGoal(this, (double)1.25F));
+        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2, false) {
             @Override
             protected double getAttackReachSqr(LivingEntity entity) {
                 return this.mob.getBbWidth() * this.mob.getBbWidth() + entity.getBbWidth();
             }
         });
-        this.goalSelector.addGoal(2, new RandomStrollGoal(this, 1));
-        this.targetSelector.addGoal(3, new HurtByTargetGoal(this));
-        this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
-        this.goalSelector.addGoal(5, new FloatGoal(this));
+        this.goalSelector.addGoal(3, new RandomStrollGoal(this, 1));
+        this.targetSelector.addGoal(4, new HurtByTargetGoal(this));
+        this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
     }
 
     @Override
@@ -69,12 +72,21 @@ public abstract class SprunkiEntity extends PathfinderMob {
 
     @Override
     public SoundEvent getHurtSound(DamageSource ds) {
-        return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.generic.hurt"));
+        return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.sheep.hurt"));
     }
 
     @Override
     public SoundEvent getDeathSound() {
-        return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.generic.death"));
+        return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.sheep.death"));
+    }
+
+    @Override
+    public void tick() {
+        if (BrainSweepChecker.retrieve().CheckIfBrainSwept(this)){
+            BrainSweep(this); // really funny, look at at/petrak/hexcasting/common/casting/actions/spells/great/OpBrainsweep.kt
+            return;
+        }
+        super.tick();
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -87,13 +99,19 @@ public abstract class SprunkiEntity extends PathfinderMob {
         return builder;
     }
 
-    public void BrainSweep(){ // flaying sprunki's mind will result in replacing with polo
-        Level level = level();
+    public static void BrainSweep(SprunkiEntity thatentity){ // flaying sprunki's mind will result in replacing with polo
+        Level level = thatentity.level();
         PoloSprunkiEntity polo = Sprunkis.POLO.get().create(level);
         assert polo != null;
-        polo.setHealth(this.getHealth());
-        polo.moveTo(getX(),getY(),getZ(),getXRot(),getYRot());
+        polo.setHealth(thatentity.getHealth());
+        polo.moveTo(thatentity.getX(),thatentity.getY(),thatentity.getZ(),thatentity.getYRot(),thatentity.getXRot());
+        polo.setCustomName(thatentity.getCustomName());
+        CompoundTag thetag = new CompoundTag();
+        thatentity.addAdditionalSaveData(thetag);
+        if (thetag.getBoolean("PersistenceRequired")) { // pretty much a stupid workaround but makes sure that PersistenceRequired is available on public
+            polo.setPersistenceRequired();
+        }
         level.addFreshEntity(polo);
-        this.remove(RemovalReason.KILLED);
+        thatentity.remove(RemovalReason.KILLED);
     }
 }

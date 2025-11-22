@@ -4,34 +4,47 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import geriosb.technicalsprunki.common.entity.sprunki.PoloSprunkiEntity;
+import geriosb.technicalsprunki.common.entity.sprunki.FunBotSprunkiEntity;
+import geriosb.technicalsprunki.common.entity.sprunki.OrenSprunkiEntity;
+import geriosb.technicalsprunki.init.AllItems;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.ItemStack;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 
 import static geriosb.technicalsprunki.TechnicalSprunkiMod.rl;
 
-public class PoloSprunkiRenderer extends EntityRenderer<PoloSprunkiEntity> {
-    private static final ResourceLocation tex = rl("textures/sprunki/polo.png");
+public class FunBotSprunkiRenderer extends EntityRenderer<FunBotSprunkiEntity> {
+    private final BlockRenderDispatcher blockRenderer;
+    private static final ModelManager modelManager = Minecraft.getInstance().getModelManager();
+    private static final ResourceLocation tex = rl("textures/sprunki/funbot.png");
+    private static final ResourceLocation headaccessory = rl("models/sprunki/oren_head");
 
-    public PoloSprunkiRenderer(EntityRendererProvider.Context p_174008_) {
+    public FunBotSprunkiRenderer(EntityRendererProvider.Context p_174008_) {
         super(p_174008_);
+        this.blockRenderer = p_174008_.getBlockRenderDispatcher();
     }
 
     @Override
-    public ResourceLocation getTextureLocation(PoloSprunkiEntity orenSprunkiEntity) {
+    public ResourceLocation getTextureLocation(FunBotSprunkiEntity orenSprunkiEntity) {
         return tex;
     }
+
     @Override
-    public void render(PoloSprunkiEntity sprunki, float yaw, float partialTicks, PoseStack ps,
+    public void render(FunBotSprunkiEntity sprunki, float yaw, float partialTicks, PoseStack ps,
                        MultiBufferSource bufSource, int packedLight) {
 
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        var itemRenderer = Minecraft.getInstance().getItemRenderer();
 
         ps.pushPose();
 
@@ -59,6 +72,16 @@ public class PoloSprunkiRenderer extends EntityRenderer<PoloSprunkiEntity> {
             ps.mulPose(Axis.YP.rotationDegrees(-sprunki.getYHeadRot()-90));
             ps.mulPose(Axis.ZP.rotationDegrees(-sprunki.getXRot()));
             SprunkiRenderUtils.RenderHead(sprunki,yaw,partialTicks,ps,bufSource,packedLight,tex,headsize,color);
+            ps.popPose();
+            // headphones and antennas
+            ps.pushPose();
+            ps.translate(0f,headheight,0f);
+            ps.pushPose();
+            ps.mulPose(Axis.YP.rotationDegrees(-sprunki.getYHeadRot()+180));
+            ps.mulPose(Axis.XP.rotationDegrees(-sprunki.getXRot()));
+            itemRenderer.renderStatic(new ItemStack(AllItems.OREN_HEADPHONES.get()), ItemDisplayContext.FIXED, packedLight, OverlayTexture.NO_OVERLAY, ps, bufSource, sprunki.level(), 1);
+            ps.popPose();
+
             ps.popPose();
         }
 

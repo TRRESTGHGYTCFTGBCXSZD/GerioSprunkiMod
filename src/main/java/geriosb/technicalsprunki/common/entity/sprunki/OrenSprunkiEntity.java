@@ -1,6 +1,8 @@
 package geriosb.technicalsprunki.common.entity.sprunki;
 
+import at.petrak.hexcasting.xplat.IXplatAbstractions;
 import geriosb.technicalsprunki.init.Sprunkis;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;

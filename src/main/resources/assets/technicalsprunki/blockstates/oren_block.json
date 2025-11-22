@@ -1,0 +1,10 @@
+{
+	"variants":{
+		"": [
+			{"model":"technicalsprunki:block/oren_block"},
+			{"model":"technicalsprunki:block/oren_block", "y": 90 },
+			{"model":"technicalsprunki:block/oren_block", "y": 180 },
+			{"model":"technicalsprunki:block/oren_block", "y": 270 }
+		]
+	}
+}

@@ -25,7 +25,6 @@ public class SprunkiRenderUtils {
 
         var verts = bufSource.getBuffer(layer);
         // Remember: CCW
-        // body
         for (int ra = 1;ra<bodysegs;ra+=2) {
             float rx = 0f;
             float ry = bodybottomsize;
@@ -72,6 +71,7 @@ public class SprunkiRenderUtils {
         RenderType layer = RenderType.entityCutout(texture);
 
         var verts = bufSource.getBuffer(layer);
+        // Remember: CCW
         for (int ra = 0;ra<headsegsx;ra++) {
             for (int rb = 0;rb<headsegsy;rb++) {
                 float rr = (float) (Math.sin((rb*Math.PI)/((float) headsegsy))*headsize/2);
